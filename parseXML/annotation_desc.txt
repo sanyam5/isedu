@@ -1,0 +1,24 @@
+<Expertise>
+<Relevance>
+<Classification_Example>
+<Classification_Definition>
+<Classification_Illustrations>
+<Classification_QA>
+<Classification_Other>
+<Source_ClassWebpage>
+<Source_Encyclopedia>
+<Source_Blog>
+<Source_Forums>
+<Source_Book>
+<Source_Presentation>
+<Source_Publication>
+<Source_HowTo>
+<Source_Manual>
+<Source_Other>
+<QueryID>
+<RelativeEducativeness>
+<Educativeness>
+
+# json contains dictionary of key,val
+# key is docID
+# val is array of user features, order of features/columns given above
