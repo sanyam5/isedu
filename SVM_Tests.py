@@ -74,22 +74,24 @@ def task_4_results():
     kf = KFold(n_folds=k)
     num_manual_features = len(X_manual[0])
     accuracies = []
-    for i in range(num_manual_features):
-        accuracies.append([])
     X_manual_np = np.asarray(X_manual)
     for train_index, test_index in kf.split(X_content):
-        X_train = X_content[train_index]
-        X_test = X_content[test_index]
+        X_content_train = X_content[train_index]
+        X_manual_test = X_manual[test_index] # Just for structure, populated below
+        X_content_test = X_content[test_index]
+        num_test = len(test_index)
         for i in range(num_manual_features):
-            y_train = X_manual_np[train_index, i]
-            y_test = X_manual_np[test_index, i]
-            SVM.learn_svm(X_train, list(y_train), "task_4_model")
-            accuracies[i].append(SVM.test_svm_accuracy(X_test, list(y_test), "task_4_model"))
+            X_np_train = X_manual_np[train_index, i]
+            SVM.learn_svm(X_content_train, list(X_np_train), "task_4_model")
+            for j in range(num_test):
+                X_manual_test[j][i] = SVM.load_svm("task_4_model").predict([X_content_test[j]])[0]
+        X_manual_train = X_manual[train_index]
+        y_train = y[train_index]
+        y_test = y[test_index]
+        SVM.learn_svm(X_manual_train, y_train, "task_4_model_1")
+        accuracies.append(SVM.test_svm_accuracy(X_manual_test, y_test, "task_1_model"))
 
-    for i in range(num_manual_features):
-        print "Accuracy for task_4 (" + names[i] + "):", np.mean(accuracies[i]), "+-", np.std(accuracies[i])
-
+    print "Accuracy for task_4:", np.mean(accuracies), "+-", np.std(accuracies)
     return accuracies
-
 
 # Custom code to initialize X and y
