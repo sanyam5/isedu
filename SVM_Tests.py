@@ -68,7 +68,7 @@ def task_3_results():
             accuracies[i].append(SVM.test_svm_accuracy(X_test, list(y_test), "task_3_model"))
 
     for i in range(num_manual_features):
-        print "Accuracy for task_3 (" + names[i] + "):", np.mean(accuracies[i]), "+-", np.std(accuracies[i])
+        print "Accuracy for task_3 (" + str(names[i]) + "):", np.mean(accuracies[i]), "+-", np.std(accuracies[i])
 
     return accuracies
 
@@ -93,7 +93,7 @@ def task_4_results():
         y_train = y[train_index]
         y_test = y[test_index]
         SVM.learn_svm(X_manual_train, y_train, "task_4_model_1")
-        accuracies.append(SVM.test_svm_accuracy(X_manual_test, y_test, "task_1_model"))
+        accuracies.append(SVM.test_svm_accuracy(X_manual_test, y_test, "task_4_model_1"))
 
     print "Accuracy for task_4:", np.mean(accuracies), "+-", np.std(accuracies)
     return accuracies
@@ -109,4 +109,6 @@ with open('y.json','r') as f:
     y = np.asarray(json.load(f))
 
 # task_1_results()
-task_2_results()
+# task_2_results()
+# task_3_results()
+task_4_results()
