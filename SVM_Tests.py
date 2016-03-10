@@ -102,7 +102,11 @@ def task_4_results():
 with open('X.json','r') as f:
     X_content = np.asarray(json.load(f))
 
+with open('X_manual.json','r') as f:
+    X_manual = np.asarray(json.load(f))
+
 with open('y.json','r') as f:
     y = np.asarray(json.load(f))
 
-task_1_results()
+# task_1_results()
+task_2_results()
