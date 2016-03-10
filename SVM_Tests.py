@@ -2,6 +2,7 @@ import SVM
 from Utilities import *
 from sklearn.model_selection import KFold
 import numpy as np
+import json
 
 # Parameters
 k = 10  # folds for cross validation
@@ -18,7 +19,8 @@ y = []  # Educativeness
 def task_1_results():
     kf = KFold(n_folds=k)
     accuracies = []
-    for train_index, test_index in kf.split(y):
+    for train_index, test_index in kf.split(X_content):
+        # print train_index
         X_train = X_content[train_index]
         X_test = X_content[test_index]
         y_train = y[train_index]
@@ -95,3 +97,10 @@ def task_4_results():
     return accuracies
 
 # Custom code to initialize X and y
+with open('X.json','r') as f:
+    X_content = np.asarray(json.load(f))
+
+with open('y.json','r') as f:
+    y = np.asarray(json.load(f))
+
+task_1_results()
