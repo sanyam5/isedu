@@ -4,6 +4,8 @@ from sklearn.model_selection import KFold
 import numpy as np
 import json
 
+logger.setLevel(logging.WARNING)
+
 # Parameters
 k = 10  # folds for cross validation
 names = smart_dict()  # Dictionary for names of manual features, initialized by reflective
