@@ -5,7 +5,7 @@ import Utilities
 
 
 def learn_svm(X, y, filename="learnt"):
-    clf = svm.SVC(kernel='rbf', class_weight='balanced', verbose=False)
+    clf = svm.SVC(kernel='rbf', verbose=False)
     Utilities.logger.debug('Learning Model ' + filename)
     clf.fit(X, y)
     Utilities.logger.debug('Learnt Model')

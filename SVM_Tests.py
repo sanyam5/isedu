@@ -2,7 +2,6 @@ import SVM
 from Utilities import *
 from sklearn.model_selection import KFold
 import numpy as np
-import json
 
 logger.setLevel(logging.WARNING)
 
@@ -72,6 +71,7 @@ def task_3_results():
 
     return accuracies
 
+
 # Task 4 uses content features to predict manual features
 # Requires: X_content, X_manual, y
 def task_4_results():
@@ -81,7 +81,7 @@ def task_4_results():
     X_manual_np = np.asarray(X_manual)
     for train_index, test_index in kf.split(X_content):
         X_content_train = X_content[train_index]
-        X_manual_test = X_manual[test_index] # Just for structure, populated below
+        X_manual_test = X_manual[test_index]  # Just for structure, populated below
         X_content_test = X_content[test_index]
         num_test = len(test_index)
         for i in range(num_manual_features):
@@ -97,18 +97,3 @@ def task_4_results():
 
     print "Accuracy for task_4:", np.mean(accuracies), "+-", np.std(accuracies)
     return accuracies
-
-# Custom code to initialize X and y
-with open('X.json','r') as f:
-    X_content = np.asarray(json.load(f))
-
-with open('X_manual.json','r') as f:
-    X_manual = np.asarray(json.load(f))
-
-with open('y.json','r') as f:
-    y = np.asarray(json.load(f))
-
-# task_1_results()
-# task_2_results()
-# task_3_results()
-task_4_results()
