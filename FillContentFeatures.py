@@ -7,6 +7,8 @@ from collections import defaultdict
 import tldextract
 from urlparse import urlparse
 
+# Fills the unigrams, bigrams, and different link features
+
 def get_user_features():
     user_features = {}
     with open('annotation_data.json') as data_file:
@@ -370,8 +372,8 @@ def main():
     X = get_features(X,addresses,subdomains,domains,suffices)
     # return
     json.dump(X, open('X.json', 'wb'))
-    # json.dump(z, open('y.json', 'wb'))
-    # json.dump(Y, open('X_manual.json', 'wb'))
+    json.dump(z, open('y.json', 'wb'))
+    json.dump(Y, open('X_manual.json', 'wb'))
 
 
 if __name__ == '__main__':
