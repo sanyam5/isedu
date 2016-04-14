@@ -4,7 +4,7 @@ from sklearn.model_selection import KFold
 import numpy as np
 
 logger.setLevel(logging.WARNING)
-
+prefix = 0
 # Parameters
 k = 10  # folds for cross validation
 names = smart_dict()  # Dictionary for names of manual features, initialized by reflective
@@ -26,8 +26,8 @@ def task_1_results():
         X_test = X_content[test_index]
         y_train = y[train_index]
         y_test = y[test_index]
-        SVM.learn_svm(X_train, y_train, "task_1_model")
-        accuracies.append(SVM.test_svm_accuracy(X_test, y_test, "task_1_model"))
+        SVM.learn_svm(X_train, y_train, prefix+"task_1_model")
+        accuracies.append(SVM.test_svm_accuracy(X_test, y_test, prefix+"task_1_model"))
     print "Accuracy for task_1:", np.mean(accuracies), "+-", np.std(accuracies)
     return accuracies
 
@@ -42,8 +42,8 @@ def task_2_results():
         X_test = X_manual[test_index]
         y_train = y[train_index]
         y_test = y[test_index]
-        SVM.learn_svm(X_train, y_train, "task_2_model")
-        accuracies.append(SVM.test_svm_accuracy(X_test, y_test, "task_2_model"))
+        SVM.learn_svm(X_train, y_train, prefix+"task_2_model")
+        accuracies.append(SVM.test_svm_accuracy(X_test, y_test, prefix+"task_2_model"))
     print "Accuracy for task_2:", np.mean(accuracies), "+-", np.std(accuracies)
     return accuracies
 
@@ -63,8 +63,8 @@ def task_3_results():
         for i in range(num_manual_features):
             y_train = X_manual_np[train_index, i]
             y_test = X_manual_np[test_index, i]
-            SVM.learn_svm(X_train, list(y_train), "task_3_model")
-            accuracies[i].append(SVM.test_svm_accuracy(X_test, list(y_test), "task_3_model"))
+            SVM.learn_svm(X_train, list(y_train), prefix+"task_3_model")
+            accuracies[i].append(SVM.test_svm_accuracy(X_test, list(y_test), prefix+"task_3_model"))
 
     for i in range(num_manual_features):
         print "Accuracy for task_3 (" + str(names[i]) + "):", np.mean(accuracies[i]), "+-", np.std(accuracies[i])
@@ -86,14 +86,14 @@ def task_4_results():
         num_test = len(test_index)
         for i in range(num_manual_features):
             X_np_train = X_manual_np[train_index, i]
-            SVM.learn_svm(X_content_train, list(X_np_train), "task_4_model")
+            SVM.learn_svm(X_content_train, list(X_np_train), prefix+"task_4_model")
             for j in range(num_test):
-                X_manual_test[j][i] = SVM.load_svm("task_4_model").predict([X_content_test[j]])[0]
+                X_manual_test[j][i] = SVM.load_svm(prefix+"task_4_model").predict([X_content_test[j]])[0]
         X_manual_train = X_manual[train_index]
         y_train = y[train_index]
         y_test = y[test_index]
-        SVM.learn_svm(X_manual_train, y_train, "task_4_model_1")
-        accuracies.append(SVM.test_svm_accuracy(X_manual_test, y_test, "task_4_model_1"))
+        SVM.learn_svm(X_manual_train, y_train, prefix+"task_4_model_1")
+        accuracies.append(SVM.test_svm_accuracy(X_manual_test, y_test, prefix+"task_4_model_1"))
 
     print "Accuracy for task_4:", np.mean(accuracies), "+-", np.std(accuracies)
     return accuracies
